@@ -34,7 +34,7 @@
     <h1>Overwatch calculador de PixelSkipping</h1>
     <p>
      Esta herramienta te sera muy útil al momento de buscar tu DPI y sensibilidad adecuada, tener un bajo DPI y alta sensibilidad </BR>
-	 muchas veces puede nos entregar una "omisión de pixeles", por su traducción al Español desde "PixelSkipping", eso disminuye </BR>
+	 muchas veces nos puede entregar una "omisión de pixeles", por su traducción al Español desde "PixelSkipping", eso disminuye </BR>
 	 nuestra precisión puesto que al no avanzar homogeniamente pixel por pixel, se nos dificulta acertar tiros los cuales requieren de precisión. </BR>
 	</p>
 	 El DPI debe ser el doble que la sensibilidad debido a la ley de Shannon, para nosotros esta nos es utíl en el mundo gamer. </BR>
@@ -42,7 +42,10 @@
      Ingresa tu configuración, si la resolución en la que juegas esta marcada en azul, significa que no tienes ninguna omisión de pixel. </BR>
      Si por el contrario esta se marca en rojo, debes cambiar tu configuración ya que estas teniendo perdidas de pixeles. </BR>
     </p>
-	
+	<font color="red">
+	*De todas maneras la alta sensibilidad y dpi omite pixeles, esta herramienta te ayuda a calcular el numero exacto que </BR>
+	te servira ya que muchas veces no basta con tener solo una cifra baja.*
+	</font>
     <h2>Especificaciones:</h2>
     <div class="container">
       <label>DPI <input id="dpi" type="text" value="400" onkeyup="calculate()"/></label>
@@ -54,7 +57,7 @@
     <div class="container">
       <label>Pulgadas para completar 360° <input id="inchp360" type="text" value="" readonly disabled/></label>
       <label>CM para completar 360° <input id="cmp360" type="text" value="" readonly disabled/></label>
-      <label>Muestras <input id="rawdotpdeg" type="text" value="" readonly disabled/></label>
+      <label>Muestra <input id="rawdotpdeg" type="text" value="" readonly disabled/></label>
       <label>Muestra de Ley de Shannon <input id="dotpdeg" type="text" value="" readonly disabled/></label>
       <label>720p 16:9 Pixeles Perdidos <input id="pixelpdeg720" type="text" value="" readonly disabled/></label>
       <label>900p 16:9 Pixeles Perdidos <input id="pixelpdeg900" type="text" value="" readonly disabled/></label>
