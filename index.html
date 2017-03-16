@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Overwatch calculador de Pixelskip</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        align-items: flex-end;
+      }
+
+      input {
+        width: 60px;
+      }
+
+      .error {
+        background-color: pink;
+      }
+
+      .pass {
+        background-color: skyblue;
+      }
+
+      #dotpdeg {
+        border-style: double;
+      }
+    </style>
+  </head>
+  <body>
+  </font>
+
+  <font face="cALIBRI">
+    <h1>Overwatch calculador de PixelSkipping</h1>
+    <p>
+     Esta herramienta te sera muy útil al momento de buscar tu DPI y sensibilidad adecuada, tener un bajo DPI y alta sensibilidad </BR>
+	 muchas veces puede resultar el llamado "omisión de pixeles", por su traducción al Español desde "PixelSkipping", eso disminuye </BR>
+	 nuestra precisión puesto que al no avanzar homogeniamente pixel por pixel, se nos dificulta acertar tiros los cuales requieren de presunción. </BR>
+	</p>
+	 El DPI debe ser el doble que la sensibilidad debido a la ley de Shannon, para nosotros nos es útil. </BR>
+    <p>
+     Ingresa tu configuración, si la resolución en la que juegas esta marcada en azul, significa que no tienes ninguna omisión de pixel. </BR>
+     Si por el contrario esta se marca en rojo, debes cambiar tu configuración ya que estas teniendo perdidas de pixeles. </BR>
+    </p>
+	
+    <h2>Especificaciones:</h2>
+    <div class="container">
+      <label>DPI <input id="dpi" type="text" value="400" onkeyup="calculate()"/></label>
+      <label>Sensibilidad en el juego<input id="sensitvity" type="text" value="10" onkeyup="calculate()"/></label>
+      <label>Campo visual <input id="fov" type="text" value="103" onkeyup="calculate()"/></label>
+    </div>
+    <hr/>
+    <h2>Resultados:</h2>
+    <div class="container">
+      <label>Pulgadas para completar 360° <input id="inchp360" type="text" value="" readonly disabled/></label>
+      <label>CM para completar 360° <input id="cmp360" type="text" value="" readonly disabled/></label>
+      <label>Muestras <input id="rawdotpdeg" type="text" value="" readonly disabled/></label>
+      <label>Muestra de Ley de Shannon <input id="dotpdeg" type="text" value="" readonly disabled/></label>
+      <label>720p 16:9 Pixeles Perdidos <input id="pixelpdeg720" type="text" value="" readonly disabled/></label>
+      <label>900p 16:9 Pixeles Perdidos <input id="pixelpdeg900" type="text" value="" readonly disabled/></label>
+      <label>1080p 16:9 Pixeles Perdidos <input id="pixelpdeg1080" type="text" value="" readonly disabled/></label>
+      <label>1440p 16:9 Pixeles Perdidos <input id="pixelpdeg1440" type="text" value="" readonly disabled/></label>
+      <label>2160p 16:9 Pixeles Perdidos <input id="pixelpdeg2160" type="text" value="" readonly disabled/></label>
+      <label>1080p 21:9 Pixeles Perdidos <input id="pixelpdeg108021by9" type="text" value="" readonly disabled/></label>
+    </div>
+	
+
+    <script type="text/javascript">
+
+      function roundTwoPlaces(number) {
+        return Math.round(100 * number) / 100;
+      }
+
+      function calculate() {
+        var dpi = Number(document.getElementById("dpi").value);
+        var sensitvity = Number(document.getElementById("sensitvity").value);
+        var fov = Number(document.getElementById("fov").value);
+
+        var inchp360 = (360 * 10 / 3) / (dpi * sensitvity * 0.022);
+        var cmp360 = 2.54 * inchp360;
+        var rawdotpdeg = dpi * inchp360 / 360;
+        var dotpdeg = rawdotpdeg / 2;
+        var pixelpdeg720 = (16 * 720 / 9) / fov;
+        var pixelpdeg900 = (16 * 900 / 9) / fov;
+        var pixelpdeg1080 = (16 * 1080 / 9) / fov;
+        var pixelpdeg1440 = (16 * 1440 / 9) / fov;
+        var pixelpdeg2160 = (16 * 2160 / 9) / fov;
+        var pixelpdeg108021by9 = (64 * 1080 / 27) / fov;
+
+        document.getElementById("inchp360").value = roundTwoPlaces(inchp360);
+        document.getElementById("cmp360").value = roundTwoPlaces(cmp360);
+        document.getElementById("rawdotpdeg").value = roundTwoPlaces(rawdotpdeg);
+        document.getElementById("dotpdeg").value = roundTwoPlaces(dotpdeg);
+        document.getElementById("pixelpdeg720").value = roundTwoPlaces(pixelpdeg720);
+        document.getElementById("pixelpdeg900").value = roundTwoPlaces(pixelpdeg900);
+        document.getElementById("pixelpdeg1080").value = roundTwoPlaces(pixelpdeg1080);
+        document.getElementById("pixelpdeg1440").value = roundTwoPlaces(pixelpdeg1440);
+        document.getElementById("pixelpdeg2160").value = roundTwoPlaces(pixelpdeg2160);
+        document.getElementById("pixelpdeg108021by9").value = roundTwoPlaces(pixelpdeg108021by9);
+
+        document.getElementById("pixelpdeg720").className = "";
+        document.getElementById("pixelpdeg900").className = "";
+        document.getElementById("pixelpdeg1080").className = "";
+        document.getElementById("pixelpdeg1440").className = "";
+        document.getElementById("pixelpdeg2160").className = "";
+        document.getElementById("pixelpdeg108021by9").className = "";
+
+        document.getElementById("pixelpdeg720").className = pixelpdeg720 > dotpdeg ? "error" : "pass";
+        document.getElementById("pixelpdeg900").className = pixelpdeg900 > dotpdeg ? "error" : "pass";
+        document.getElementById("pixelpdeg1080").className = pixelpdeg1080 > dotpdeg ? "error" : "pass";
+        document.getElementById("pixelpdeg1440").className = pixelpdeg1440 > dotpdeg ? "error" : "pass";
+        document.getElementById("pixelpdeg2160").className = pixelpdeg2160 > dotpdeg ? "error" : "pass";
+        document.getElementById("pixelpdeg108021by9").className = pixelpdeg108021by9 > dotpdeg ? "error" : "pass";
+      }
+
+      calculate();
+    </script>
+  </body>
+</html>
